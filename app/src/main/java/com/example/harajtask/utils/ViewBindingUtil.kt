@@ -5,6 +5,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import java.util.*
 
 object ViewBindingUtil {
     @BindingAdapter("isVisible")
@@ -30,5 +32,15 @@ object ViewBindingUtil {
         RelativeTime.getTimeAgo(date)?.let {
             text = it
         }
+    }
+    @BindingAdapter("adDateFormatted")
+    @JvmStatic
+    fun TextView.dateFormatted(date: Long?){
+        if (date == null) return
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.ENGLISH)
+        sdf.format(Date(date)).let {
+            text = it
+        }
+
     }
 }

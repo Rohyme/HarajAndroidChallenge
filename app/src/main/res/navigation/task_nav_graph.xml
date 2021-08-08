@@ -9,5 +9,21 @@
         android:id="@+id/mainAdsFragment"
         android:name="com.example.harajtask.presenter.mainAdsList.MainAdsFragment"
         tools:layout="@layout/main_ads_fragment"
-        android:label="MainAdsFragment" />
+        android:label="Ads screen" >
+        <action
+            android:id="@+id/action_mainAdsFragment_to_adDetailsFragment"
+            app:destination="@id/adDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adDetailsFragment"
+        android:name="com.example.harajtask.presenter.adDetails.AdDetailsFragment"
+        tools:layout="@layout/ad_details_fragment"
+        android:label="{adTitle}" >
+        <argument
+            android:name="adId"
+            app:argType="integer" />
+        <argument
+            android:name="adTitle"
+            app:argType="string" />
+    </fragment>
 </navigation>

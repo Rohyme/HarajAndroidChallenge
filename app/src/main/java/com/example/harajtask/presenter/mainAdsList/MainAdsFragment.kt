@@ -16,7 +16,9 @@ import kotlinx.android.synthetic.main.main_ads_fragment.*
 import android.app.Activity
 
 import android.R.attr.name
+import android.R.attr.textColorHint
 import android.view.inputmethod.InputMethodManager
+import androidx.navigation.fragment.findNavController
 
 
 @AndroidEntryPoint
@@ -24,8 +26,11 @@ class MainAdsFragment : Fragment() {
     private val viewModel: MainAdsViewModel by viewModels()
     private lateinit var binding: MainAdsFragmentBinding
     private val adsAdapter by lazy {
-        AdsAdapter {
-
+        AdsAdapter {ad ->
+            ad.id?.let {id ->
+                val dirs = MainAdsFragmentDirections.actionMainAdsFragmentToAdDetailsFragment(id, ad.title)
+                findNavController().navigate(dirs)
+            }
         }
     }
 
