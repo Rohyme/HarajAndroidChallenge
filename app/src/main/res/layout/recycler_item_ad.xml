@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="adModel"
+            type="com.example.harajtask.data.entities.AdInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imageContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".3">
+
+            <ImageView
+                android:id="@+id/adImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:imgUrl="@{adModel.thumbURL}"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/adTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@android:color/holo_green_dark"
+            android:textDirection="rtl"
+            android:textSize="20sp"
+            android:text="@{adModel.title}"
+            android:textStyle="bold"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@id/imageContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/imageContainer"
+            tools:text="Here we are" />
+
+        <TextView
+            android:id="@+id/adTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/black"
+            app:adDate="@{adModel.date}"
+            app:layout_constraintStart_toStartOf="@id/adTitle"
+            app:layout_constraintTop_toBottomOf="@id/adTitle"
+            tools:text="Since 3 hours" />
+
+        <TextView
+            android:id="@+id/sellerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            app:drawableStartCompat="@drawable/ic_seller"
+            android:text="@{adModel.username}"
+            android:textDirection="rtl"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toStartOf="@id/location"
+            app:layout_constraintStart_toStartOf="@id/adTitle"
+            app:layout_constraintTop_toBottomOf="@id/adTime"
+            tools:text="Mohamed Rohyme" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black"
+            android:text="@{adModel.city}"
+            android:textDirection="rtl"
+            app:drawableStartCompat="@drawable/ic_location"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="@id/sellerName"
+            app:layout_constraintEnd_toStartOf="@id/imageContainer"
+            app:layout_constraintStart_toEndOf="@id/sellerName"
+            app:layout_constraintTop_toTopOf="@id/sellerName"
+            tools:text="Mohamed Rohyme" />
+
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/locationAndSellerBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="sellerName,location"
+            tools:layout_editor_absoluteY="139dp" />
+
+        <TextView
+            android:id="@+id/commentsCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="@{adModel.commentCount + ``}"
+            app:isVisible="@{adModel.commentCount > 0}"
+            android:textColor="@android:color/black"
+            app:drawableStartCompat="@drawable/ic_comment"
+            app:layout_constraintStart_toStartOf="@id/adTitle"
+            app:layout_constraintTop_toBottomOf="@id/locationAndSellerBarrier"
+            tools:text="(30)" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
